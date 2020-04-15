@@ -29,7 +29,7 @@ uint32_t irq_flag;
 
 uint32_t g_count;
 
-int irq_gpiohs2(void* ctx)
+int irq_gpiohs2(void *ctx)
 {
     irq_flag = gpiohs_get_pin(GPIO_KEY);
 
@@ -61,5 +61,6 @@ int main(void)
 
     gpiohs_irq_register(GPIO_KEY, 1, irq_gpiohs2, &g_count);
 
-    while (1);
+    while (1)
+        ;
 }

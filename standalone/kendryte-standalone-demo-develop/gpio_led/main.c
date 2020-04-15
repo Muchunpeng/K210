@@ -14,21 +14,24 @@
  */
 #include <stdio.h>
 #include <unistd.h>
+
 #include "fpioa.h"
 #include "gpio.h"
 
-int main(void)
-{
-    fpioa_set_function(24, FUNC_GPIO3);
-
-    gpio_init();
-    gpio_set_drive_mode(3, GPIO_DM_OUTPUT);
-    gpio_pin_value_t value = GPIO_PV_HIGH;
-    gpio_set_pin(3, value);
-    while (1)
-    {
-        sleep(1);
-        gpio_set_pin(3, value = !value);
-    }
-    return 0;
+int main(void) {
+  /* 将IO24设置为普通IO3 */
+  fpioa_set_function(24, FUNC_GPIO3);
+  /* 初始化IO */
+  gpio_init();
+  /* 设置GPIO3为输出模式 */
+  gpio_set_drive_mode(3, GPIO_DM_OUTPUT);
+  /* 设置GPIO3为高电平 */
+  gpio_pin_value_t value = GPIO_PV_HIGH;
+  gpio_set_pin(3, value);
+  while (1) {
+    sleep(1);
+    /* 电平反转 */
+    gpio_set_pin(3, value = !value);
+  }
+  return 0;
 }
