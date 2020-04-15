@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "devices.h": "c",
+        "project_cfg.h": "c",
+        "task.h": "c"
+    }
+}

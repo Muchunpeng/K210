@@ -45,7 +45,7 @@ void vTask2()
 int main()
 {
     gio = io_open("/dev/gpio0");
-    configASSERT(gio);
+    (gio);
 
     gpio_set_drive_mode(gio, 2, GPIO_DM_INPUT);
     gpio_set_drive_mode(gio, 3, GPIO_DM_OUTPUT);

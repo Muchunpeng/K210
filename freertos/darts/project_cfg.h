@@ -12,34 +12,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <FreeRTOS.h>
-#include <stdio.h>
-#include <task.h>
+#ifndef _PROJECT_CFG_H_
+#define _PROJECT_CFG_H_
+#include <pin_cfg.h>
 
-#include "dvp_camera.h"
-#include "lcd.h"
-#include "ov5640.h"
-
-void vTask1()
+const fpioa_cfg_t g_fpioa_cfg =
 {
-    while (1)
+    .version = PIN_CFG_VERSION,
+    .functions_count = 2,
+    .functions =
     {
-        while (dvp_finish_flag == 0)
-            ;
-        dvp_finish_flag = 0;
-        lcd_draw_picture(0, 0, 320, 240, gram_mux ? lcd_gram1 : lcd_gram0);
-        gram_mux ^= 0x01;
+        {30, FUNC_UART1_RX},
+        {31, FUNC_UART1_TX}
     }
-}
+};
 
-int main(void)
-{
-    printf("lcd init\n");
-    lcd_init();
-    printf("DVP init\n");
-    dvp_init();
-    ov5640_init();
-
-    xTaskCreate(vTask1, "vTask1", 1024, NULL, 3, NULL);
-    vTaskDelete(NULL);
-}
+#endif
