@@ -45,7 +45,8 @@ void servo_task(void *pvParameters);
 void bsp_init()
 {
     imu_init();
-
+    servo_init();
+    visual();
 }
 void start_task(void *pvParameters)
 {
@@ -77,10 +78,14 @@ void start_task(void *pvParameters)
 }
 int main()
 {
-
     bsp_init();
-    while (1)
-    {
-
-    }
+    //创建开始任务
+    xTaskCreate((TaskFunction_t )start_task,            //任务函数
+                (const char*    )"start_task",          //任务名称
+                (uint16_t       )START_STK_SIZE,        //任务堆栈大小
+                (void*          )NULL,                  //传递给任务函数的参数
+                (UBaseType_t    )START_TASK_PRIO,       //任务优先级
+                (TaskHandle_t*  )&StartTask_Handler);   //任务句柄
+    vTaskStartScheduler();          //开启任务调度
+    while (1);
 }

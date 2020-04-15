@@ -47,7 +47,7 @@ int main()
     gio = io_open("/dev/gpio0");
     (gio);
 
-    gpio_set_drive_mode(gio, 2, GPIO_DM_INPUT);
+    VC(gio, 2, GPIO_DM_INPUT);
     gpio_set_drive_mode(gio, 3, GPIO_DM_OUTPUT);
     gpio_set_pin_value(gio, 3, GPIO_PV_HIGH);
 
